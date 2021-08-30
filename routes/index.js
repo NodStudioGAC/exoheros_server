@@ -4,6 +4,9 @@ const express = require('express');
 /* End Routers Import */
 
 const router = express.Router();
-router.get('/', (req, res) => {
-});
+
+const { Test } = require('../apps/handlers');
+
+router.get('/test/', Test.test);
+
 module.exports = router;
