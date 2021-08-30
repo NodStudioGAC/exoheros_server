@@ -10,8 +10,11 @@ const PORT = 8080;
 
 const app = express();
 
+const router = require('./routes/index');
+
 app.use(cors());
 app.use(bodyParser.json());
+app.use(router);
 
 const server = http.createServer(app);
 server.listen(PORT, () => {
