@@ -31,19 +31,26 @@ const Handler = {
     const { name } = req.params;
     player = new Player(name, 1, 10, 5, 2, 0);
     res.send(player);
+    console.log(player);
   },
   adventure: (req, res) => {
     const radomAction = Math.floor(Math.random() * 20);
-
+console.log("Arriver");
     if (radomAction <= 10) {
       // le joueur trouve un obj
+      console.log("1");
       res.send(findObjet());
-    } else if (radomAction < 20) {
+    } else if (radomAction <= 20) {
       // le joueur rencontre un monstre
+      console.log("2");
       createMonster();
       res.send(`Le joueur combat un monstre de niveau ${currentMonster.level}`);
     }
     // Le joueur part en aventure, soit il trouve un objet ou combat un monstre
+  },
+  reload:(req,res) => 
+  {
+    res.send(player);
   },
   atack1: (req, res) => {
     res.send('Attaque 1');
@@ -62,6 +69,13 @@ const Handler = {
     res.send('Popo Heal');
     // Utilisation de la popo de Heal si le joueur en possède
   },
+  routePost: (req, res) =>{
+    //console.log(req.body);
+    res.send('ok');
+  },
+  loadMonster: (req,res) =>{
+    res.send(currentMonster);
+  }
 };
 
 const atack = (bonusAtack) => {
@@ -94,8 +108,8 @@ const findObjet = () => {
     player.lifePotion++;
     console.log(player.lifePotion);
     return ('Le joueur trouve une potion de heal');
-  } if (randomObject > 5) {
-    return ('Avance');
+  } else if (randomObject > 5) {
+    return  ('Avance'); //afficher le Pop Up
   }
 };
 
